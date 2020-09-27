@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use League\CommonMark\CommonMarkConverter;
 
 class Question extends Model
 {
@@ -19,7 +20,7 @@ class Question extends Model
     }
     
     public function getUrlAttribute(){
-        return route("questions.show", $this->id);
+        return route("questions.show", $this->slug);
     }
     
     public function getCreatedDateAttribute(){
@@ -33,6 +34,12 @@ class Question extends Model
             }
             return "answered";
         }else return "unanswered";
+    }
+    
+    public function getBodyHtmlAttribute(){
+        $markdown = new CommonMarkConverter(['allow_unsafe_links' => false]);
+        
+        return $markdown -> convertToHtml($this->body);
     }
     
 }

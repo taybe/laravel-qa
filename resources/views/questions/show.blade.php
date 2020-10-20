@@ -34,7 +34,7 @@
                                     @csrf
                                     <input type="hidden" name="vote" value="-1">
                             </form>
-                            <a title="{{ Auth::guest() ? 'Login to Favorite' : ($question->is_favorited ? 'Marked as Favorite(Click to Undo)' : 'Mark as Favorite') }}" class="favorite mt-2 {{ Auth::guest() ? 'off' : ($question->is_favorited ? 'favorited' : '') }}" onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->id }}').submit();">
+                            <a title="{{ Auth::guest() ? 'Login to Favorite' : ($question->is_favorited ? 'Marked as Favorite (Click to Undo)' : 'Mark as Favorite') }}" class="favorite mt-2 {{ Auth::guest() ? 'off' : ($question->is_favorited ? 'favorited' : '') }}" onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->id }}').submit();">
                                 <i class="fa fa-star fa-lg"></i>
                                 <span class="favorites-count">{{ $question->favorites_count }}</span>
                             </a>

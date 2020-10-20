@@ -11,31 +11,39 @@
                     @foreach ($answers as $answer)
                             <div class="media">
                                 <div class="d-flex flex-column vote-controls">
-                                <a title="This answer is useful" class="vote-up">
-                                    <i class="fa fa-caret-up fa-3x"></i>
-                                </a>
-                                <span class="votes-count">1230</span>
-                                <a title="This answer is not useful" class="vote-down off">
-                                    <i class="fa fa-caret-down fa-3x"></i>
-                                </a>
-                                @can('accept', $answer)
-                                    <a title="Mark this answer as best answer" 
-                                        class="{{ $answer->status }} mt-2"
-                                        onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();">
-                                        <i class="fa fa-check fa-2x"></i>
+                                    <a title="This answer is useful" class="vote-up {{ Auth::guest() ? 'off' : '' }}" onclick="event.preventDefault(); document.getElementById('up-vote-answer-{{ $answer->id }}').submit();">
+                                        <i class="fa fa-caret-up fa-3x"></i>
                                     </a>
-                                @else
-                                    @if ($answer->is_best)
-                                        <a title="The question owner accepted this answer as best answer" 
-                                        class="{{ $answer->status }} mt-2">
-                                        <i class="fa fa-check fa-2x"></i>
-                                    </a>
-                                    @endif
-                                @endcan
-                                    <form id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="POST" style="display:none">
-                                    @csrf
+                                    <form id="up-vote-answer-{{ $answer->id }}" action="/answers/{{ $answer->id }}/vote" method="POST" style="display:none">
+                                            @csrf
+                                            <input type="hidden" name="vote" value="1">
                                     </form>
-                            </div>
+                                    <span class="votes-count">{{ $answer->votes_count }}</span>
+                                    <a title="This answer is not useful" class="vote-down {{ Auth::guest() ? 'off' : '' }}" onclick="event.preventDefault(); document.getElementById('down-vote-answer-{{ $answer->id }}').submit();">
+                                        <i class="fa fa-caret-down fa-3x"></i>
+                                    </a>
+                                    <form id="down-vote-answer-{{ $answer->id }}" action="/answers/{{ $answer->id }}/vote" method="POST" style="display:none">
+                                            @csrf
+                                            <input type="hidden" name="vote" value="-1">
+                                    </form>
+                                    @can('accept', $answer)
+                                        <a title="Mark this answer as best answer" 
+                                            class="{{ $answer->status }} mt-2"
+                                            onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();">
+                                            <i class="fa fa-check fa-2x"></i>
+                                        </a>
+                                    @else
+                                        @if ($answer->is_best)
+                                            <a title="The question owner accepted this answer as best answer" 
+                                            class="{{ $answer->status }} mt-2">
+                                            <i class="fa fa-check fa-2x"></i>
+                                        </a>
+                                        @endif
+                                    @endcan
+                                        <form id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="POST" style="display:none">
+                                        @csrf
+                                        </form>
+                                </div>
                             <div class="media-body">
                                 {!! $answer->body_html !!}
                                 <div class="row">

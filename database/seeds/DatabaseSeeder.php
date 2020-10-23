@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
             UsersQuestionsAnswersTableSeeder::class,
             FavoritesTableSeeder::class,
             VotablesTableSeeder::class,
-        ])
-
+        ]);
     }
 }

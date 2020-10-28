@@ -37,7 +37,7 @@
         
         computed: {
             canAccept(){
-                return true;
+                return this.authorize('accept', this.answer);
             },
             accepted(){
                 return !this.canAccept && this.isBest;

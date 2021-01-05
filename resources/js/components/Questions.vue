@@ -3,7 +3,7 @@
                         <div class="card-body">
 
                            <div v-if="questions.length">
-                            <question-excerpt v-for="question in questions" :question="question" :key="question.id"></question-excerpt>
+                            <question-excerpt @deleted="remove(index)" v-for="(question, index) in questions" :question="question" :key="question.id"></question-excerpt>
                            </div>
                             <div v-else class="alert alert-warning">
                                 <strong>Sorry</strong> there are no questions available.
@@ -46,6 +46,10 @@ export default {
                     this.meta = data.meta;
                     this.links = data.links;
                 })
+        },
+        remove (index) {
+            this.questions.splice(index, 1);
+            this.count--;
         }
     },
     

@@ -26,7 +26,7 @@
                         <div class="d-flex align-items-center">
                             <h2>{{ title }}</h2>
                             <div class="ml-auto">
-                                <a href="/questions" class="btn btn-outline-secondary">Back to All Questions</a>
+                                <router-link exact :to="{ name: 'questions' }" class="btn btn-outline-secondary">Back to all Questions</router-link>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                     <div class="media">
                         <vote :model="question" name="question"></vote>
                         <div class="media-body">
-                            <div v-html="bodyHtml" ref="bodyHtml"></div>
+                            <div v-html="body" ref="body"></div>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="ml-auto">

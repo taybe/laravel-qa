@@ -19,10 +19,11 @@ class AnswerResource extends JsonResource
             'votes_count' => $this->votes_count,
             'is_best' => $this->is_best,
             'body' => $this->body,
-            'body_html' => $this->body_htnl,
+            'body_html' => $this->body_html,
             'user' => new UserResource($this->user),
             'question_id' => $this->question_id,
             'created_date' => $this->created_date,
+            'question_user_id' => $this->question->iser_id
         ];
     }
 }

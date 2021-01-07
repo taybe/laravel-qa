@@ -58,7 +58,7 @@ class Question extends Model
     }
     
     public function isFavorited(){
-        return $this->favorites()->where('user_id', auth()->id())->count() > 0;
+        return $this->favorites()->where('user_id', auth('api')->id())->count() > 0;
     }
     
     public function getIsFavoritedAttribute(){
@@ -80,7 +80,7 @@ class Question extends Model
     private function bodyHtml(){
         $markdown = new CommonMarkConverter(['allow_unsafe_links' => false]);
         
-        return $markdown -> convertToHtml($this->body);
+        return $markdown->convertToHtml($this->body);
     }
 
 }

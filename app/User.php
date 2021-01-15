@@ -72,7 +72,7 @@ class User extends Authenticatable
         
         foreach($posts as $post){
             $item =[
-                'votest_count' => $post->votes_count,
+                'votes_count' => $post->votes_count,
                 'created_at' => $post->created_at->format('M d Y')
             ];
             

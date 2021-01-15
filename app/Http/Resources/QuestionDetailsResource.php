@@ -22,7 +22,7 @@ class QuestionDetailsResource extends JsonResource
             'is_favorited' => $this->is_favorited,
             'favorites_count' => $this->favorites_count,
             'body' => $this->body,
-            'body_html' => $this->body_htnl,
+            'body_html' => $this->body_html,
             'excerpt' => $this->excerpt,
             'user' => new UserResource($this->user),
             'created_date' => $this->created_date,

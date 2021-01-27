@@ -35,6 +35,8 @@ class AnswersController extends Controller
         
         $answer = $question->answers()->create(['body' => $request->body, 'user_id' => \Auth::id()]);
         
+        if (env('APP_ENV') == 'local') sleep(2);
+        
         return response()->json([
             'message' => 'Your answer has been submitted successfully.',
             'answer' => new AnswerResource($answer->load('user'))
